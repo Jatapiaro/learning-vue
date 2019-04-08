@@ -9,6 +9,15 @@
 @import '~bootstrap/scss/bootstrap';
 
 .navbar-laravel {
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.content {
+    margin-top: 25px;
+}
+
+.invalid-feedback {
+    display: block;
+    font-size: 15px;
 }

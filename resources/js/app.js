@@ -9,25 +9,42 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+import VueRouter from 'vue-router';
+Vue.use(VueRouter);
 
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
+import VueAxios from 'vue-axios';
+Vue.use(VueAxios, window.axios);
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+import Wrapper from './components/Wrapper.vue';
+import Home from './pages/Home.vue';
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+// Posts
+import Posts from './pages/posts/Posts.vue';
+import CreatePost from './pages/posts/CreatePost.vue';
+import EditPost from './pages/posts/EditPost.vue';
 
-const app = new Vue({
-    el: '#app'
-});
+const routes = [
+    {
+        name: 'home',
+        path: '/',
+        component: Home
+    },
+    {
+        name: 'posts',
+        path: '/posts',
+        component: Posts
+    },
+    {
+        name: 'create-post',
+        path: '/create-post',
+        component: CreatePost
+    },
+    {
+        name: 'edit-post',
+        path: '/edit-post/:id',
+        component: EditPost
+    },
+];
+
+const router = new VueRouter({ mode: 'history', routes: routes });
+const app = new Vue(Vue.util.extend({ router }, Wrapper)).$mount('#app');
